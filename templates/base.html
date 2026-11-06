@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Edzéstervező</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212; /* Majdnem fekete háttér */
+            color: #ffffff; /* Fehér szöveg */
+        }
+        .navbar {
+            background-color: #000000 !important; /* Koromfekete menü */
+            border-bottom: 2px solid #ff6600; /* Narancs csík alul */
+        }
+        .text-orange {
+            color: #ff6600 !important;
+        }
+        .btn-orange {
+            background-color: #ff6600;
+            color: white;
+            border: none;
+            font-weight: bold;
+        }
+        .btn-orange:hover {
+            background-color: #cc5200;
+            color: white;
+        }
+        .card {
+            background-color: #1e1e1e; /* Sötétszürke kártyák */
+            border: 1px solid #333;
+            color: white;
+        }
+        .form-control, .form-select {
+            background-color: #2d2d2d;
+            border: 1px solid #444;
+            color: white;
+        }
+        .form-control:focus, .form-select:focus {
+            background-color: #2d2d2d;
+            color: white;
+            border-color: #ff6600;
+            box-shadow: 0 0 5px rgba(255, 102, 0, 0.5);
+        }
+        .dropdown-menu {
+            background-color: #000;
+            border: 1px solid #ff6600;
+        }
+        .dropdown-item {
+            color: white;
+        }
+        .dropdown-item:hover {
+            background-color: #ff6600;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark p-3">
+    <div class="container">
+        <a class="navbar-brand fw-bold text-orange" href="/"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarNav">
+            {% if current_user.is_authenticated %}
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">
+                        Menü
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/">Főoldal</a></li>
+                        <li><a class="dropdown-item" href="/dashboard">Edzéstervezés</a></li>
+                        <li><a class="dropdown-item" href="/dolgozoink">Dolgozóink</a></li>
+                        <li><hr class="dropdown-divider bg-light"></li>
+                        <li><a class="dropdown-item text-danger" href="/logout">Kilépés</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item ms-3">
+                    <span class="nav-link text-orange">Szia, {{ current_user.username }}!</span>
+                </li>
+            </ul>
+            {% else %}
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="/login">Belépés</a></li>
+                <li class="nav-item"><a class="nav-link btn btn-orange px-3 ms-2" href="/register">Regisztráció</a></li>
+            </ul>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+<div class="container mt-4">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

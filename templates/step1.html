@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-lg">
+            <div class="card-header bg-black text-orange border-bottom border-warning">
+                <h4>1. Lépés: Alapok</h4>
+            </div>
+            <div class="card-body">
+                <form action="/dashboard/step2" method="POST">
+                    
+                    <label class="form-label fw-bold mt-3">Milyen szinten vagy?</label>
+                    <select name="nehezseg" class="form-select mb-3">
+                        <option value="1">Kezdő (Novice)</option>
+                        <option value="2">Középhaladó (Intermediate)</option>
+                        <option value="3">Haladó (Advanced)</option>
+                    </select>
+
+                    <label class="form-label fw-bold mt-3">Mi a Célod?</label>
+                    <select name="cel" class="form-select mb-4">
+                        <option value="1">Fogyás (Zsírégetés)</option>
+                        <option value="2">Izomépítés (Erő)</option>
+                        <option value="3">Állóképesség (Kardió)</option>
+                        <option value="4">Tartásjavítás (Egészség)</option>
+                    </select>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-orange btn-lg">Tovább a Stílushoz ➝</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-lg">
+            <div class="card-header bg-black text-orange border-bottom border-warning">
+                <h4>2. Lépés: Részletek</h4>
+            </div>
+            <div class="card-body">
+                <form action="/dashboard/result" method="POST">
+                    
+                    <input type="hidden" name="nehezseg" value="{{ nehezseg }}">
+                    <input type="hidden" name="cel" value="{{ cel }}">
+
+                    <label class="form-label fw-bold mt-3">Válassz Stílust (A Célod alapján):</label>
+                    <select name="stilus" class="form-select mb-3">
+                        {% for value, name in stilusok %}
+                            <option value="{{ value }}">{{ name }}</option>
+                        {% endfor %}
+                    </select>
+
+                    <label class="form-label fw-bold mt-3">Melyik testrészre fókuszáljunk?</label>
+                    <select name="izom" class="form-select mb-4">
+                        <option value="4">Teljes Test (Full Body)</option>
+                        <option value="1">Core / Has</option>
+                        <option value="2">Alsótest (Láb)</option>
+                        <option value="3">Felsőtest</option>
+                    </select>
+
+                    <div class="d-flex justify-content-between">
+                        <a href="/dashboard" class="btn btn-outline-light">← Vissza</a>
+                        <button type="submit" class="btn btn-orange btn-lg">Terv Generálása</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
